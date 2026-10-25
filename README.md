@@ -14,6 +14,7 @@ Ouvrir `index.html` dans un navigateur moderne. Aucune installation ni compilati
 - Explorer : cliquer et faire glisser autour de la Terre, à la souris ou au tactile. Les déplacements restent sur l’orbite circulaire afin de conserver une lunaison cohérente.
 - Clavier : Tab pour naviguer ; flèches sur le curseur ou l’orbite ; sur l’orbite, Maj + flèche = 0,1 jour, Page précédente/suivante = ±3 jours, Début/Fin = limites du cycle.
 - Quiz : six questions, correction immédiate, score et redémarrage.
+- Deux sections pédagogiques complètent la simulation : éclipses solaires (totale, partielle, annulaire, hybride) et lunaires (pénombrale, partielle, totale), puis évolution des heures de lever, de passage au méridien et de coucher selon les huit phases. Les schémas d’alignement sont non proportionnels ; les horaires sont des repères idéalisés en heure solaire locale, sans calcul pour une date ou un lieu. Le retard moyen de 50 minutes concerne le retour au méridien ; les levers et couchers ont des décalages variables.
 
 La lecture ne démarre jamais automatiquement. Une activation de la préférence de réduction des mouvements ou le passage en arrière-plan met la simulation en pause. Même avec cette préférence, le bouton Lecture reste disponible sur demande explicite. Les mouvements décoratifs et le défilement fluide sont désactivés.
 
