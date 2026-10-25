@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b111b">
+  <meta name="description" content="Explorez les phases de la Lune avec une simulation interactive et un quiz, sans connexion Internet.">
+  <title>Luna — Comprendre les phases de la Lune</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#simulateur">Aller au simulateur</a>
+<header class="header wrap">
+  <a class="brand" href="#" aria-label="Luna, accueil"><span class="brand-icon">◒</span> luna<span class="brand-dot">.</span></a>
+  <nav aria-label="Navigation principale"><a href="#simulateur" class="nav-active">Simulateur</a><a href="#phases">Les 8 phases</a><a href="#comprendre">Comprendre</a><a href="#quiz">Le quiz <span>↗</span></a></nav>
+  <span class="header-note"><span class="tiny-star">✧</span> Un petit pas vers la science</span>
+</header>
+<main class="wrap">
+  <section class="intro">
+    <div><p class="eyebrow"><span></span> L’ATELIER DU CIEL</p><h1>Une Lune.<br>Une infinité de regards<span>.</span></h1><p class="intro-text">Et si tout était une question de point de vue ?<br>Explorez son orbite et percez le secret des phases lunaires.</p></div>
+    <div class="intro-aside"><span class="orbit-mark">✳</span><p>Observez. Manipulez.<br><strong>Comprenez l’invisible.</strong></p><span class="small-tag">SCIENCES · DÈS 11 ANS</span></div>
+  </section>
+
+  <section id="simulateur" class="simulation" aria-labelledby="sim-title">
+    <div class="panel-top"><div><span class="section-number">01 /</span><h2 id="sim-title">Le laboratoire lunaire</h2><span class="live-badge"><i></i> EN DIRECT</span></div><div class="mode-switch" role="group" aria-label="Mode de simulation"><button id="observe" aria-pressed="true">◉ Observer</button><button id="explore" aria-pressed="false">↗ Explorer</button></div></div>
+    <div class="lab-grid">
+      <div class="orbital-panel">
+        <div class="view-label">VUE DU DESSUS <span>· PÔLE NORD</span></div>
+        <svg id="orbit" viewBox="0 0 760 410" role="slider" tabindex="0" aria-label="Position de la Lune sur son orbite, en jours" aria-valuemin="0" aria-valuemax="29.53" aria-valuenow="9.7" aria-describedby="orbit-help">
+          <defs>
+            <radialGradient id="sunGlow"><stop stop-color="#e9a34f" stop-opacity=".22"/><stop offset="1" stop-color="#e9a34f" stop-opacity="0"/></radialGradient>
+            <radialGradient id="sunFill" cx="65%" cy="40%"><stop stop-color="#ffe0a0"/><stop offset=".7" stop-color="#f8b855"/><stop offset="1" stop-color="#d98332"/></radialGradient>
+            <radialGradient id="earthFill" cx="28%" cy="30%"><stop stop-color="#69abc6"/><stop offset=".55" stop-color="#326381"/><stop offset="1" stop-color="#0c1d30"/></radialGradient>
+            <linearGradient id="earthShade"><stop stop-color="#060e19" stop-opacity="0"/><stop offset=".48" stop-color="#060e19" stop-opacity=".08"/><stop offset=".52" stop-color="#060e19" stop-opacity=".7"/><stop offset="1" stop-color="#060e19" stop-opacity=".95"/></linearGradient>
+            <linearGradient id="moonOrbitFill"><stop stop-color="#e3e2d4"/><stop offset=".49" stop-color="#b9bdb8"/><stop offset=".51" stop-color="#353e48"/><stop offset="1" stop-color="#222b36"/></linearGradient>
+            <clipPath id="earthClip"><circle cx="420" cy="205" r="33"/></clipPath>
+            <marker id="rayArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 1 9 5 0 9" fill="none" stroke="#ac874d"/></marker>
+          </defs>
+          <g stroke="#9c793e" stroke-opacity=".25" marker-end="url(#rayArrow)"><path d="M112 115H685"/><path d="M115 175H685"/><path d="M115 235H685"/><path d="M112 295H685"/></g>
+          <circle cx="45" cy="205" r="125" fill="url(#sunGlow)"/><circle cx="45" cy="205" r="45" fill="url(#sunFill)"/>
+          <text x="45" y="276" text-anchor="middle" class="svg-label sun-label">SOLEIL</text><text x="145" y="91" class="svg-note">Lumière du Soleil</text>
+          <circle cx="420" cy="205" r="145" fill="none" stroke="#34404f" stroke-width="1"/>
+          <circle cx="420" cy="205" r="145" fill="none" stroke="#727d84" stroke-width="3" stroke-dasharray="1 113" opacity=".6"/>
+          <path id="angle-sector" fill="#bdcd8620" stroke="#bdcd8660" stroke-width="1"/>
+          <path id="earth-moon-line" stroke="#c1ce87" stroke-dasharray="4 5" opacity=".55"/>
+          <text id="angle-label" x="375" y="240" class="svg-angle"></text>
+          <circle cx="420" cy="205" r="37" fill="#5a9bcc" opacity=".08"/>
+          <g clip-path="url(#earthClip)"><circle cx="420" cy="205" r="33" fill="url(#earthFill)"/><path d="M399 173l10 6 3 9-9 5 5 10-9 3-8-10-5-2 2-15ZM416 200l12 5-2 8-6 6-3 16-8-6-2-13-5-8ZM435 175l15 9 10 16-15 5-4-9-8-3-9 1 2-11Z" fill="#88a79a"/><path d="M391 185q22-9 43 7M392 219q22 9 49 0" fill="none" stroke="#d6e4e4" stroke-width="3" opacity=".4"/><circle cx="420" cy="205" r="33" fill="url(#earthShade)"/></g>
+          <text x="420" y="262" text-anchor="middle" class="svg-label">TERRE</text>
+          <g id="orbital-moon"><circle r="27" fill="none" stroke="#bdcd86" stroke-opacity=".22"/><circle r="17" fill="url(#moonOrbitFill)"/><circle cx="-7" cy="-5" r="4" fill="#7e8584" opacity=".3"/><circle cx="-5" cy="8" r="3" fill="#7e8584" opacity=".3"/><text y="-38" text-anchor="middle" class="svg-label moon-label">LUNE</text></g>
+          <path d="M540 308l-3 12 13-2" fill="none" stroke="#75818f"/><text x="579" y="348" class="svg-note" text-anchor="middle">Sens de révolution</text>
+        </svg>
+        <div class="orbit-bottom"><span id="orbit-help">↗ Cliquez sur l’orbite pour déplacer la Lune</span><span>Schéma non à l’échelle</span></div>
+      </div>
+      <aside class="earth-view" aria-label="Apparence de la Lune depuis la Terre">
+        <p class="view-label">DEPUIS LA TERRE <span>↗</span></p><p class="hemisphere">Hémisphère Nord · nord en haut</p>
+        <div class="moon-stage"><canvas id="main-moon" width="240" height="240" role="img" aria-label="Disque lunaire"></canvas></div>
+        <p class="phase-kicker">PHASE ACTUELLE</p><h3 id="phase-name">Lune gibbeuse croissante</h3>
+        <div class="phase-stats"><div><strong id="illumination">73 %</strong><span>de la face visible éclairée</span></div><div><strong id="current-day">9,7 <small>j</small></strong><span>sur 29,53 jours</span></div></div>
+      </aside>
+    </div>
+    <div class="controls">
+      <div class="timeline-label"><span>VOTRE VOYAGE DANS LE CYCLE</span><span>Jour <strong id="day-label">9,70</strong> <span>/ 29,53</span></span></div>
+      <input id="timeline" type="range" min="0" max="29.53" step="0.01" value="9.7" aria-label="Jour de la lunaison">
+      <div class="timeline-ticks"><span>Nouvelle Lune</span><span>Premier quartier</span><span>Pleine Lune</span><span>Dernier quartier</span><span>Nouvelle Lune</span></div>
+      <div class="transport"><div class="transport-main"><button id="back" class="icon-button" aria-label="Reculer d’un jour">−1 j</button><button id="play" class="play-button" aria-pressed="false"><span>▶</span> Lecture</button><button id="forward" class="icon-button" aria-label="Avancer d’un jour">+1 j</button><span class="control-divider"></span><label class="speed-label" for="speed">Vitesse</label><select id="speed" aria-label="Vitesse de lecture"><option value="1">×1</option><option value="2">×2</option><option value="5">×5</option></select></div><button id="reset" class="reset-button">↺ <span>Réinitialiser</span></button></div>
+    </div>
+  </section>
+  <section class="explanation" aria-labelledby="explanation-title"><span class="explain-icon">✧</span><div><p class="eyebrow">CE QUE VOUS OBSERVEZ</p><h3 id="explanation-title">La lumière révèle la géométrie.</h3><p id="dynamic-explanation"></p><p id="angle-explanation" class="angle-info"></p></div><span class="explanation-decoration" aria-hidden="true">☾</span></section>
+
+  <section id="phases" class="content-section"><div class="section-heading"><div><p class="eyebrow">UN CYCLE, HUIT REPÈRES</p><h2>Les visages de la Lune</h2></div><p>Cliquez sur une phase pour l’observer.<br>Entre ces repères, tout change en continu.</p></div><div id="phase-grid" class="phase-grid"></div></section>
+
+  <section id="comprendre" class="content-section knowledge"><div class="knowledge-intro"><p class="eyebrow">AU-DELÀ DES APPARENCES</p><h2>Un peu de science.<br>Beaucoup de déclics.</h2><p>La Lune ne change pas de forme.<br>C’est notre regard qui change.</p><div class="science-note"><span>↗</span><p><strong>Un modèle pour comprendre</strong><br>Orbite circulaire et coplanaire, distances et tailles simplifiées. Ce simulateur ne prédit pas le ciel à une date donnée.</p></div></div><div class="accordions">
+    <details open><summary>Pourquoi la Lune a-t-elle des phases ? <span>+</span></summary><p>La Lune ne produit pas sa propre lumière : elle réfléchit celle du Soleil. Celui-ci éclaire toujours environ la moitié de sa surface. En tournant autour de la Terre, la Lune nous montre une fraction différente de cette moitié éclairée. C’est cette géométrie qui crée les phases.</p></details>
+    <details><summary>Pourquoi voit-on toujours la même face ? <span>+</span></summary><p>La Lune tourne sur elle-même en environ 27,32 jours et fait un tour autour de la Terre par rapport aux étoiles en ce même temps. Cette rotation synchrone nous présente approximativement la même face. De petits balancements, les librations, nous permettent d’en voir un peu plus de la moitié au fil du temps.</p></details>
+    <details><summary>Est-ce l’ombre de la Terre ? <span>+</span></summary><p>Non. Une phase est la partie éclairée que nous pouvons voir, même quand la Lune ne traverse aucune ombre terrestre. L’ombre de la Terre n’intervient que lors d’une éclipse de Lune : un événement particulier à la pleine Lune.</p></details>
+    <details><summary>Pourquoi n’y a-t-il pas une éclipse chaque mois ? <span>+</span></summary><p>L’orbite lunaire est inclinée d’environ 5,1° par rapport au plan de l’orbite terrestre autour du Soleil. À la nouvelle ou à la pleine Lune, les trois astres passent donc généralement au-dessus ou au-dessous d’un alignement exact. Une éclipse n’est possible que près des points où les deux plans se croisent. Cette inclinaison n’est pas représentée ici ; le schéma ne simule pas les éclipses.</p></details>
+    <details><summary>Rotation, révolution, lunaison : quelle différence ? <span>+</span></summary><p>La <strong>rotation</strong> est le tour de la Lune sur elle-même. Sa <strong>révolution sidérale</strong> est son tour autour de la Terre par rapport aux étoiles : environ 27,32 jours. La <strong>lunaison</strong>, ou période synodique, sépare deux nouvelles Lunes : 29,53 jours en moyenne. Comme la Terre avance autour du Soleil, la Lune doit aller un peu plus loin pour retrouver la même géométrie. Ici, l’angle représenté est celui du cycle synodique.</p></details>
+  </div></section>
+
+  <section id="quiz" class="quiz-section"><div class="quiz-intro"><p class="eyebrow">À VOUS DE JOUER</p><h2>Vous avez la tête<br>dans les étoiles ?</h2><p>6 questions pour voir les phases<br>sous un nouveau jour.</p><span class="quiz-stars" aria-hidden="true">✧ · ☾</span></div><div class="quiz-card" id="quiz-card"><div class="quiz-top"><span id="quiz-progress">QUESTION 01 / 06</span><span id="quiz-score">0 bonne réponse</span></div><div class="quiz-progress-track"><div id="quiz-bar"></div></div><h3 id="quiz-question"></h3><div id="quiz-options"></div><p id="quiz-feedback" role="status"></p><button id="quiz-next" class="play-button" hidden>Question suivante →</button></div></section>
+</main>
+<footer class="wrap"><a class="brand" href="#">◒ luna.</a><p>Comprendre le ciel, un regard à la fois.</p><span>Un atelier interactif · 100 % dans votre navigateur</span></footer>
+<div id="announcer" class="sr-only" role="status" aria-live="polite"></div>
+</body>
+</html>
