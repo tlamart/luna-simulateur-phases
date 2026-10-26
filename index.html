@@ -22,6 +22,9 @@
     <div class="intro-aside"><span class="orbit-mark">✳</span><p>Observez. Manipulez.<br><strong>Comprenez l’invisible.</strong></p><span class="small-tag">SCIENCES · DÈS 11 ANS</span></div>
   </section>
 
+  <div id="topic-tabs" class="section-tabs" role="tablist" aria-label="Les ateliers lunaires" hidden><button id="tab-simulateur" type="button" role="tab" aria-controls="panel-simulateur" aria-selected="false" tabindex="-1" data-topic="simulateur">Simulateur</button><button id="tab-phases" type="button" role="tab" aria-controls="panel-phases" aria-selected="false" tabindex="-1" data-topic="phases">Les 8 phases</button><button id="tab-comprendre" type="button" role="tab" aria-controls="panel-comprendre" aria-selected="false" tabindex="-1" data-topic="comprendre">Comprendre</button><button id="tab-eclipses" type="button" role="tab" aria-controls="panel-eclipses" aria-selected="false" tabindex="-1" data-topic="eclipses">Éclipses</button><button id="tab-horaires-lune" type="button" role="tab" aria-controls="panel-horaires-lune" aria-selected="false" tabindex="-1" data-topic="horaires-lune">Lever & coucher</button><button id="tab-marees" type="button" role="tab" aria-controls="panel-marees" aria-selected="false" tabindex="-1" data-topic="marees">Marées</button><button id="tab-quiz" type="button" role="tab" aria-controls="panel-quiz" aria-selected="false" tabindex="-1" data-topic="quiz">Quiz</button></div>
+
+  <div id="panel-simulateur" class="tab-panel" role="tabpanel" aria-labelledby="tab-simulateur" tabindex="0">
   <section id="simulateur" class="simulation" aria-labelledby="sim-title">
     <div class="panel-top"><div><span class="section-number">01 /</span><h2 id="sim-title">Le laboratoire lunaire</h2><span class="live-badge"><i></i> EN DIRECT</span></div><div class="mode-switch" role="group" aria-label="Mode de simulation"><button id="observe" aria-pressed="true">◉ Observer</button><button id="explore" aria-pressed="false">↗ Explorer</button></div></div>
     <div class="lab-grid">
@@ -69,8 +72,14 @@
   </section>
   <section class="explanation" aria-labelledby="explanation-title"><span class="explain-icon">✧</span><div><p class="eyebrow">CE QUE VOUS OBSERVEZ</p><h3 id="explanation-title">La lumière révèle la géométrie.</h3><p id="dynamic-explanation"></p><p id="angle-explanation" class="angle-info"></p></div><span class="explanation-decoration" aria-hidden="true">☾</span></section>
 
+  </div>
+
+  <div id="panel-phases" class="tab-panel" role="tabpanel" aria-labelledby="tab-phases" tabindex="0">
   <section id="phases" class="content-section"><div class="section-heading"><div><p class="eyebrow">UN CYCLE, HUIT REPÈRES</p><h2>Les visages de la Lune</h2></div><p>Cliquez sur une phase pour l’observer.<br>Entre ces repères, tout change en continu.</p></div><div id="phase-grid" class="phase-grid"></div></section>
 
+  </div>
+
+  <div id="panel-comprendre" class="tab-panel" role="tabpanel" aria-labelledby="tab-comprendre" tabindex="0">
   <section id="comprendre" class="content-section knowledge"><div class="knowledge-intro"><p class="eyebrow">AU-DELÀ DES APPARENCES</p><h2>Un peu de science.<br>Beaucoup de déclics.</h2><p>La Lune ne change pas de forme.<br>C’est notre regard qui change.</p><div class="science-note"><span>↗</span><p><strong>Un modèle pour comprendre</strong><br>Orbite circulaire et coplanaire, distances et tailles simplifiées. Ce simulateur ne prédit pas le ciel à une date donnée.</p></div></div><div class="accordions">
     <details open><summary>Pourquoi la Lune a-t-elle des phases ? <span>+</span></summary><p>La Lune ne produit pas sa propre lumière : elle réfléchit celle du Soleil. Celui-ci éclaire toujours environ la moitié de sa surface. En tournant autour de la Terre, la Lune nous montre une fraction différente de cette moitié éclairée. C’est cette géométrie qui crée les phases.</p></details>
     <details><summary>Pourquoi voit-on toujours la même face ? <span>+</span></summary><p>La Lune tourne sur elle-même en environ 27,32 jours et fait un tour autour de la Terre par rapport aux étoiles en ce même temps. Cette rotation synchrone nous présente approximativement la même face. De petits balancements, les librations, nous permettent d’en voir un peu plus de la moitié au fil du temps.</p></details>
@@ -79,8 +88,9 @@
     <details><summary>Rotation, révolution, lunaison : quelle différence ? <span>+</span></summary><p>La <strong>rotation</strong> est le tour de la Lune sur elle-même. Sa <strong>révolution sidérale</strong> est son tour autour de la Terre par rapport aux étoiles : environ 27,32 jours. La <strong>lunaison</strong>, ou période synodique, sépare deux nouvelles Lunes : 29,53 jours en moyenne. Comme la Terre avance autour du Soleil, la Lune doit aller un peu plus loin pour retrouver la même géométrie. Ici, l’angle représenté est celui du cycle synodique.</p></details>
   </div></section>
 
-  <nav class="topic-links" aria-label="Pour aller plus loin"><a href="#eclipses">Comprendre les éclipses ↘</a><a href="#horaires-lune">Quand observer la Lune ? ↘</a></nav>
+  </div>
 
+  <div id="panel-eclipses" class="tab-panel" role="tabpanel" aria-labelledby="tab-eclipses" tabindex="0">
   <section id="eclipses" class="content-section lesson" aria-labelledby="eclipses-title">
     <div class="section-heading"><div><p class="eyebrow">QUAND LES ASTRES S’ALIGNENT</p><h2 id="eclipses-title">Les éclipses, des rendez-vous rares</h2></div><p>Une phase revient chaque mois.<br>Une éclipse exige un alignement précis.</p></div>
     <div class="eclipse-grid">
@@ -111,6 +121,9 @@
     <p class="observation-note"><strong>Observer en sécurité :</strong> ne regardez jamais directement le Soleil sans filtre solaire adapté, y compris pendant une éclipse partielle ou annulaire. Utilisez des lunettes d’éclipse conformes à la norme ISO 12312-2 ; les lunettes de soleil ordinaires ne conviennent pas. Pour des jumelles ou un télescope, un filtre solaire spécifique doit être placé à l’avant de l’instrument. Une éclipse de Lune s’observe sans protection particulière.</p>
   </section>
 
+  </div>
+
+  <div id="panel-horaires-lune" class="tab-panel" role="tabpanel" aria-labelledby="tab-horaires-lune" tabindex="0">
   <section id="horaires-lune" class="content-section lesson" aria-labelledby="horaires-title">
     <div class="section-heading"><div><p class="eyebrow">LE BON MOMENT POUR LEVER LES YEUX</p><h2 id="horaires-title">La Lune a ses propres horaires</h2></div><p>Elle se voit aussi en plein jour.<br>Sa phase donne un premier indice.</p></div>
     <div class="schedule-intro"><div class="lesson-card"><span class="delay-number">≈ 50 <small>min</small></span><h3>Un rendez-vous généralement plus tardif</h3><p>La rotation terrestre fait traverser le ciel au Soleil et à la Lune. Mais, pendant ce temps, la Lune avance vers l’est sur son orbite. La Terre doit donc tourner un peu plus pour nous ramener face à elle.</p><p>Le retour de la Lune au méridien, la ligne nord–sud du ciel, prend en moyenne environ <strong>24 h 50 min</strong>. Son lever et son coucher se décalent eux aussi généralement vers des heures plus tardives, mais <strong>pas de 50 minutes exactement chaque jour</strong>.</p></div><div class="lesson-card"><p class="eyebrow">LA PHASE COMME REPÈRE</p><h3>Du soir au matin, au fil du cycle</h3><p>Après la nouvelle Lune, cherchez le <strong>premier croissant à l’ouest après le coucher du Soleil</strong>. Le premier quartier se voit surtout l’après-midi et en début de nuit. La pleine Lune accompagne presque toute la nuit.</p><p>Après la pleine Lune, les levers deviennent plus tardifs dans la soirée. Le dernier quartier s’observe surtout en seconde partie de nuit et le matin ; le dernier croissant se cherche à l’est avant le lever du Soleil.</p><p class="lesson-highlight">Une Lune visible en journée n’a rien d’exceptionnel : il suffit qu’elle soit au-dessus de l’horizon et assez éloignée du Soleil dans le ciel pour se distinguer.</p></div></div>
@@ -132,7 +145,29 @@
     </div>
     <div class="lesson-note"><strong>Pourquoi les horaires réels varient-ils ?</strong> La latitude, la saison, la position de la Lune au nord ou au sud de l’équateur céleste, sa vitesse orbitale variable et le relief de l’horizon modifient ces repères. L’heure légale dépend aussi du fuseau et de l’heure d’été. Le décalage quotidien des levers et couchers peut être bien inférieur ou supérieur à 50 minutes ; aux hautes latitudes, la Lune peut même rester au-dessus ou au-dessous de l’horizon pendant plusieurs jours. La nouvelle Lune, proche du Soleil dans le ciel, n’est normalement pas visible.</div>
   </section>
+  </div>
+
+  <div id="panel-marees" class="tab-panel" role="tabpanel" aria-labelledby="tab-marees" tabindex="0">
+  <section id="marees" class="content-section lesson" aria-labelledby="marees-title">
+    <div class="section-heading"><div><p class="eyebrow">DE LA LUNE AUX OCÉANS</p><h2 id="marees-title">Pourquoi la mer monte et descend</h2></div><p>Une attraction qui varie dans l’espace.<br>Un rythme qui transforme les littoraux.</p></div>
+    <div class="schedule-intro">
+      <article class="lesson-card"><p class="eyebrow">LE MOTEUR DES MARÉES</p><h3>La gravité n’agit pas partout de la même façon</h3><p>La Lune attire toute la Terre. Mais son attraction est un peu plus forte sur le côté proche d’elle que sur le centre de la Terre, et un peu plus faible sur le côté opposé. Cette <strong>différence d’attraction</strong> tend à étirer les océans dans la direction Terre–Lune, des deux côtés.</p><p>Dans un modèle idéal, cela forme deux renflements d’eau. En tournant, un lieu sur Terre passe dans les zones de niveau haut et bas. Les océans réels réagissent aussi aux continents, à la profondeur et à la rotation terrestre : les renflements sont une image pour comprendre la force, pas une carte des marées.</p><p class="lesson-highlight">Le Soleil provoque lui aussi des marées. Malgré sa masse immense, son effet de marée est environ deux fois plus faible que celui de la Lune, car il est beaucoup plus éloigné. L’effet dépend de la variation de la gravité avec la distance, pas seulement de l’attraction totale.</p></article>
+      <article class="lesson-card"><p class="eyebrow">DES RYTHMES LOCAUX</p><h3>Souvent deux pleines mers par jour lunaire</h3><p>Dans de nombreuses régions, deux pleines mers se succèdent à environ <strong>12 h 25 min</strong> d’intervalle : c’est le régime semi-diurne. Entre une pleine mer et une basse mer, il s’écoule alors environ 6 h 12 min. Le jour lunaire moyen dure environ 24 h 50 min.</p><p>Ce rythme n’est pas universel : certaines côtes connaissent surtout une pleine mer et une basse mer par jour, ou deux marées de hauteurs très différentes. L’heure d’une pleine mer ne correspond pas nécessairement au passage de la Lune au plus haut dans le ciel.</p><p class="lesson-highlight"><strong>Le marnage</strong> est la différence de hauteur entre une pleine mer et une basse mer successives. Il peut varier considérablement d’une côte à l’autre.</p></article>
+    </div>
+    <div class="tide-comparison">
+      <article class="lesson-card"><span class="tide-symbol" aria-hidden="true">● ─ ◉ ─ ○</span><p class="eyebrow">NOUVELLE LUNE & PLEINE LUNE</p><h3>Les vives-eaux</h3><p>Lorsque Soleil, Terre et Lune sont approximativement alignés, leurs effets de marée se renforcent. Le marnage est généralement plus grand : les pleines mers sont plus hautes et les basses mers plus basses. Ce sont les <strong>vives-eaux</strong>.</p><p>Une éclipse n’est pas nécessaire : l’alignement approximatif des phases suffit à renforcer les marées, même quand la Lune passe au-dessus ou au-dessous de l’alignement exact.</p></article>
+      <article class="lesson-card"><span class="tide-symbol" aria-hidden="true">◐ & ◑</span><p class="eyebrow">PREMIER & DERNIER QUARTIER</p><h3>Les mortes-eaux</h3><p>Les directions du Soleil et de la Lune forment alors approximativement un angle droit depuis la Terre. Leurs effets de marée se compensent en partie : le marnage est généralement plus faible. Ce sont les <strong>mortes-eaux</strong>.</p><p>La marée ne disparaît pas. Selon le lieu, les vives-eaux et mortes-eaux surviennent avec un retard de quelques heures à quelques jours par rapport aux phases correspondantes.</p></article>
+    </div>
+    <div class="lesson-note"><strong>Quels effets sur les côtes et le vivant ?</strong> À marée basse, l’estran — la zone alternativement recouverte et découverte — devient accessible. À marée haute, il est submergé. Les organismes qui y vivent doivent supporter ces changements ; de nombreux oiseaux viennent s’y nourrir à basse mer. Les courants de marée déplacent de l’eau, des nutriments et des sédiments. Les horaires et hauteurs influencent aussi la navigation, les ports, la pêche à pied et l’accès aux plages.</div>
+    <div class="lesson-note"><strong>La phase ne suffit pas à prévoir la marée.</strong> La forme des baies, les fonds marins et les résonances amplifient ou réduisent le mouvement. La distance Terre–Lune et la position des astres le modifient aussi. Le vent et la pression atmosphérique peuvent encore relever ou abaisser le niveau réel de la mer. Pour une sortie, consultez les prévisions de marée locales et la météo : ce site explique les mécanismes, sans calculer les horaires, hauteurs ou coefficients de marée.</div>
+  </section>
+
+  </div>
+
+  <div id="panel-quiz" class="tab-panel" role="tabpanel" aria-labelledby="tab-quiz" tabindex="0">
   <section id="quiz" class="quiz-section"><div class="quiz-intro"><p class="eyebrow">À VOUS DE JOUER</p><h2>Vous avez la tête<br>dans les étoiles ?</h2><p>6 questions pour voir les phases<br>sous un nouveau jour.</p><span class="quiz-stars" aria-hidden="true">✧ · ☾</span></div><div class="quiz-card" id="quiz-card"><div class="quiz-top"><span id="quiz-progress">QUESTION 01 / 06</span><span id="quiz-score">0 bonne réponse</span></div><div class="quiz-progress-track"><div id="quiz-bar"></div></div><h3 id="quiz-question"></h3><div id="quiz-options"></div><p id="quiz-feedback" role="status"></p><button id="quiz-next" class="play-button" hidden>Question suivante →</button></div></section>
+  </div>
+
 </main>
 <footer class="wrap"><a class="brand" href="#">◒ luna.</a><p>Comprendre le ciel, un regard à la fois.</p><span>Un atelier interactif · 100 % dans votre navigateur</span></footer>
 <div id="announcer" class="sr-only" role="status" aria-live="polite"></div>

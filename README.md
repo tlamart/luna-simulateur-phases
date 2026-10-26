@@ -8,13 +8,17 @@ Ouvrir `index.html` dans un navigateur moderne. Aucune installation ni compilati
 
 ## Utilisation
 
+Sept onglets organisent le site : Simulateur, Les 8 phases, Comprendre, Éclipses, Lever & coucher, Marées et Quiz. Les flèches gauche/droite et Début/Fin naviguent entre les onglets ; Tab permet d’entrer dans le panneau. Les liens directs (`#eclipses`, `#marees`, etc.) et l’historique du navigateur sélectionnent le panneau correspondant. La position lunaire et le quiz sont conservés ; quitter le simulateur met sa lecture en pause. Choisir une vignette de phase ouvre le simulateur à la position correspondante.
+
 - Observer simultanément l’orbite et le disque vu depuis la Terre.
 - Déplacer le curseur, cliquer sur l’orbite ou sélectionner une des huit phases.
 - Lecture / Pause : à ×1, une lunaison dure environ 59 secondes ; vitesses ×2 et ×5 disponibles. Les boutons ±1 j bouclent en fin de cycle. Réinitialiser revient au jour 0, à ×1 et en mode Observer.
 - Explorer : cliquer et faire glisser autour de la Terre, à la souris ou au tactile. Les déplacements restent sur l’orbite circulaire afin de conserver une lunaison cohérente.
 - Clavier : Tab pour naviguer ; flèches sur le curseur ou l’orbite ; sur l’orbite, Maj + flèche = 0,1 jour, Page précédente/suivante = ±3 jours, Début/Fin = limites du cycle.
 - Quiz : six questions, correction immédiate, score et redémarrage.
-- Deux sections pédagogiques complètent la simulation : éclipses solaires (totale, partielle, annulaire, hybride) et lunaires (pénombrale, partielle, totale), puis évolution des heures de lever, de passage au méridien et de coucher selon les huit phases. Les schémas d’alignement sont non proportionnels ; les horaires sont des repères idéalisés en heure solaire locale, sans calcul pour une date ou un lieu. Le retard moyen de 50 minutes concerne le retour au méridien ; les levers et couchers ont des décalages variables.
+- Des sections pédagogiques complètent la simulation : éclipses solaires (totale, partielle, annulaire, hybride) et lunaires (pénombrale, partielle, totale), puis évolution des heures de lever, de passage au méridien et de coucher selon les huit phases. Les schémas d’alignement sont non proportionnels ; les horaires sont des repères idéalisés en heure solaire locale, sans calcul pour une date ou un lieu. Le retard moyen de 50 minutes concerne le retour au méridien ; les levers et couchers ont des décalages variables.
+
+- L’onglet Marées explique la gravité différentielle, les rôles lunaire et solaire, les vives-eaux et mortes-eaux, les régimes locaux et les effets sur l’estran, les courants et les activités côtières. Le modèle à deux renflements est une illustration des forces ; aucun horaire, coefficient ou niveau de marée réel n’est calculé.
 
 La lecture ne démarre jamais automatiquement. Une activation de la préférence de réduction des mouvements ou le passage en arrière-plan met la simulation en pause. Même avec cette préférence, le bouton Lecture reste disponible sur demande explicite. Les mouvements décoratifs et le défilement fluide sont désactivés.
 
@@ -48,3 +52,5 @@ Les huit noms servent de repères : le nom le plus proche est affiché dans une 
 Contrôle syntaxique réussi avec `node --check script.js`. Une vérification Node avec DOM simulé a passé 1 071 assertions : huit phases dans l’ordre, fractions théoriques, inversion position/jour, aire effectivement éclairée dans les pixels du Canvas (tolérance de 1,5 point de pourcentage), orientation droite/gauche, continuité de boucle, 1 000 positions orbitales, synchronisation des commandes, lecture/pause, pas clavier et quiz complet avec redémarrage.
 
 Limite de validation : le navigateur Chromium de l’environnement de création ne peut pas démarrer à cause des restrictions du sandbox. Aucun contrôle visuel ou tactile réel n’a donc été effectué. Les styles prévoient des mises en page pour mobile, tablette et ordinateur. À vérifier dans votre navigateur : glissement tactile, navigation clavier, lisibilité et absence de débordement sur écran étroit, rendu des SVG/Canvas et console sans erreur. Les tests avec DOM simulé ne remplacent pas ces vérifications.
+
+La navigation en onglets a été vérifiée avec 40 assertions en DOM simulé : sélection exclusive, focus, flèches, Début/Fin, historique, liens directs, pause et conservation du jour lunaire. Les sept panneaux, leurs associations ARIA, les ancres HTML et la syntaxe JavaScript ont aussi été contrôlés. La limite de vérification visuelle indiquée ci-dessus demeure.

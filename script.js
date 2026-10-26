@@ -97,7 +97,7 @@ function createPhaseCards(){
     card.setAttribute('aria-pressed','false');
     card.setAttribute('aria-label',`${phase.name}, jour ${format(day)}, ${Math.round(Lunar.geometry(day).fraction*100)} % éclairés. ${phase.short}`);
     card.innerHTML=`<span class="phase-index">0${index+1}</span><canvas width="96" height="96" aria-hidden="true"></canvas><strong>${phase.name}</strong><span class="phase-meta">J ${format(day)} · ${Math.round(Lunar.geometry(day).fraction*100)} %</span><span class="phase-description">${phase.short}</span>`;
-    card.addEventListener('click',()=>{pause();setDay(day);});
+    card.addEventListener('click',()=>{pause();setDay(day);selectTab('simulateur',{updateHash:true,focusPanel:true});});
     $('phase-grid').append(card);
     MoonRenderer.draw(card.querySelector('canvas'),index/8*Lunar.TAU);
   });
@@ -242,3 +242,48 @@ $('quiz-next').addEventListener('click',()=>{
   $('quiz-question').setAttribute('tabindex','-1');$('quiz-question').focus({preventScroll:true});
 });
 createPhaseCards();setDay(state.day,false);renderQuestion();
+
+// Onglets accessibles : état conservé, liens directs et historique navigateur.
+const TOPICS = ['simulateur','phases','comprendre','eclipses','horaires-lune','marees','quiz'];
+let activeTopic = null;
+function selectTab(topic, {updateHash=false, focusPanel=false}={}) {
+  if (!TOPICS.includes(topic)) return;
+  if (topic !== 'simulateur' && state.playing) pause();
+  TOPICS.forEach(id => {
+    const selected=id===topic;
+    $(`tab-${id}`).setAttribute('aria-selected',String(selected));
+    $(`tab-${id}`).tabIndex=selected?0:-1;
+    $(`panel-${id}`).hidden=!selected;
+  });
+  activeTopic=topic;
+  if(updateHash && window.location.hash!==`#${topic}`){
+    // pushState évite le saut vers une section située sous la barre d'onglets.
+    try { window.history.pushState(null,'',`#${topic}`); }
+    catch { window.location.hash=topic; }
+  }
+  if(focusPanel) $(`panel-${topic}`).focus({preventScroll:true});
+}
+TOPICS.forEach((topic,index)=>{
+  const tab=$(`tab-${topic}`);
+  tab.addEventListener('click',()=>selectTab(topic,{updateHash:true}));
+  tab.addEventListener('keydown',event=>{
+    let next;
+    if(event.key==='ArrowRight')next=(index+1)%TOPICS.length;
+    else if(event.key==='ArrowLeft')next=(index-1+TOPICS.length)%TOPICS.length;
+    else if(event.key==='Home')next=0;
+    else if(event.key==='End')next=TOPICS.length-1;
+    else return;
+    event.preventDefault();
+    selectTab(TOPICS[next],{updateHash:true});
+    $(`tab-${TOPICS[next]}`).focus({preventScroll:true});
+    $(`tab-${TOPICS[next]}`).scrollIntoView({block:'nearest',inline:'nearest',behavior:'instant'});
+  });
+});
+function restoreTopic(){
+  const topic=window.location.hash.slice(1);
+  selectTab(TOPICS.includes(topic)?topic:'simulateur');
+}
+window.addEventListener('hashchange',restoreTopic);
+window.addEventListener('popstate',restoreTopic);
+$('topic-tabs').hidden=false;
+restoreTopic();
