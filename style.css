@@ -56,3 +56,30 @@
 .tide-comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:20px}
 .tide-symbol{display:block;color:var(--accent);font-size:29px;letter-spacing:5px;margin-bottom:17px}
 @media(max-width:700px){.section-tabs{gap:3px;margin-bottom:20px;padding:5px}.section-tabs button{font-size:11px;padding:11px 13px;min-height:44px}.tab-panel{margin-bottom:40px}.tab-panel>.content-section{padding-top:8px}.tide-comparison{grid-template-columns:1fr;gap:14px}.tide-symbol{font-size:25px}}
+
+/* Quiz : lancement, questions et bilan par thème. */
+.quiz-topic-tags{display:flex;flex-wrap:wrap;gap:7px;margin:22px 0}
+.quiz-topic-tags span,.quiz-topic{font-size:10px;color:var(--accent);border:1px solid #c4d49130;background:#c4d49108;border-radius:20px;padding:5px 10px}
+.quiz-topic{display:inline-block;margin:0 0 14px}
+.quiz-intro>.reset-button{padding:0;text-align:left;font-size:11px;line-height:1.7}
+.quiz-welcome-symbol{font-size:54px;color:var(--accent);display:block;margin-bottom:12px}
+#quiz-welcome>p:not(.eyebrow),#quiz-results>p:not(.eyebrow){font-size:12px;color:#aab6c3;line-height:1.9}
+#quiz-welcome .play-button{margin-top:10px}
+#quiz-question:focus,#quiz-result-title:focus{outline:none}
+#quiz-question{font-size:18px;line-height:1.6;margin-bottom:22px}
+#quiz-bar{width:0}
+.quiz-option{flex-wrap:wrap;font-size:12px;padding:14px;min-height:48px}
+.quiz-option-text{flex:1;min-width:0;color:inherit!important}
+.quiz-option:disabled:hover{filter:none}
+.answer-badge{flex-basis:100%;font-size:10px;margin-left:20px;color:inherit!important}
+#quiz-feedback{border-left:2px solid var(--accent);padding:12px 14px;background:#c4d49108;border-radius:0 5px 5px 0;font-size:12px}
+#quiz-feedback:empty{padding:0;border:0}
+.quiz-result-score{display:block;font:400 55px/1.3 Georgia,serif;color:var(--accent);margin:15px 0}
+#quiz-theme-results{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:22px 0}
+.quiz-theme-result{background:#151f2b;border:1px solid var(--line);border-radius:7px;padding:13px;text-align:left}
+.quiz-theme-result strong{display:block;font-size:12px;font-weight:400;color:#e1e8da}
+.quiz-theme-result span{display:block;font-size:10px;color:var(--accent);margin-top:5px;line-height:1.7}
+.quiz-review-title{font-size:13px;font-weight:400;margin:30px 0 10px}
+#quiz-review summary{font-size:11px;line-height:1.8}
+#quiz-review details p{margin-right:0}
+@media(max-width:700px){#quiz-question{font-size:16px}.quiz-option{font-size:12px;padding:12px}#quiz-theme-results{grid-template-columns:1fr}.quiz-topic-tags{margin:15px 0}.quiz-section{gap:24px}#quiz-feedback{font-size:11px}}

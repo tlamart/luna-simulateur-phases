@@ -165,7 +165,14 @@
   </div>
 
   <div id="panel-quiz" class="tab-panel" role="tabpanel" aria-labelledby="tab-quiz" tabindex="0">
-  <section id="quiz" class="quiz-section"><div class="quiz-intro"><p class="eyebrow">À VOUS DE JOUER</p><h2>Vous avez la tête<br>dans les étoiles ?</h2><p>6 questions pour voir les phases<br>sous un nouveau jour.</p><span class="quiz-stars" aria-hidden="true">✧ · ☾</span></div><div class="quiz-card" id="quiz-card"><div class="quiz-top"><span id="quiz-progress">QUESTION 01 / 06</span><span id="quiz-score">0 bonne réponse</span></div><div class="quiz-progress-track"><div id="quiz-bar"></div></div><h3 id="quiz-question"></h3><div id="quiz-options"></div><p id="quiz-feedback" role="status"></p><button id="quiz-next" class="play-button" hidden>Question suivante →</button></div></section>
+  <section id="quiz" class="quiz-section">
+    <div class="quiz-intro"><p class="eyebrow">MISSION CONNAISSANCES</p><h2>Du ciel aux océans,<br>à toi de jouer.</h2><p>8 questions · 4 thèmes · À ton rythme<br>Une réponse par question, une explication à chaque étape.</p><div class="quiz-topic-tags"><span>Phases</span><span>Éclipses</span><span>Horaires</span><span>Marées</span></div><button id="quiz-restart" class="reset-button" hidden>↺ Recommencer depuis le début</button></div>
+    <div class="quiz-card" id="quiz-card">
+      <div id="quiz-welcome"><span class="quiz-welcome-symbol" aria-hidden="true">✧</span><p class="eyebrow">PRÊT POUR L’EXPLORATION ?</p><h3>Relie tout ce que tu as découvert.</h3><p>Choisis une réponse et découvre immédiatement pourquoi elle est correcte ou non. À la fin, retrouve ton score par thème et toutes tes corrections.</p><p>Tu peux consulter les autres onglets : ta progression reste conservée tant que cette page est ouverte.</p><button id="quiz-start" class="play-button">Commencer les 8 questions →</button></div>
+      <div id="quiz-stage" hidden><div class="quiz-top"><span id="quiz-progress">QUESTION 01 / 08</span><span id="quiz-score">0 / 8 point</span></div><div id="quiz-progress-track" class="quiz-progress-track" role="progressbar" aria-label="Questions répondues" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0"><div id="quiz-bar"></div></div><span id="quiz-topic" class="quiz-topic"></span><h3 id="quiz-question" tabindex="-1"></h3><div id="quiz-options" role="group" aria-labelledby="quiz-question"></div><p id="quiz-feedback" role="status" aria-live="polite" aria-atomic="true"></p><button id="quiz-next" class="play-button" hidden>Question suivante →</button></div>
+      <div id="quiz-results" hidden><p class="eyebrow">MISSION TERMINÉE</p><h3 id="quiz-result-title" tabindex="-1">Ton bilan d’exploration</h3><strong id="quiz-result-score" class="quiz-result-score"></strong><p id="quiz-result-message"></p><div id="quiz-theme-results"></div><button id="quiz-retry" class="play-button">↺ Retenter les 8 questions</button><h4 class="quiz-review-title">Tes réponses, expliquées</h4><div id="quiz-review"></div></div>
+    </div>
+  </section>
   </div>
 
 </main>

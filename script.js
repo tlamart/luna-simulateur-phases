@@ -197,51 +197,100 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden&&state.play
 reducedMotion.addEventListener('change',()=>{if(reducedMotion.matches)pause();});
 // Aucune lecture automatique, y compris en mode prefers-reduced-motion.
 
+// Huit questions, deux par thème. Les réponses sont mémorisées pour le bilan.
+const QUIZ_TOPICS={
+  phases:{label:'Phases',panel:'phases'},
+  eclipses:{label:'Éclipses',panel:'eclipses'},
+  horaires:{label:'Lever & coucher',panel:'horaires-lune'},
+  marees:{label:'Marées',panel:'marees'}
+};
 const QUESTIONS=[
-  {q:'Pourquoi la Lune change-t-elle d’apparence ?',options:['L’ombre de la Terre recouvre une partie de la Lune.','Nous voyons une part différente de sa moitié éclairée.','La Lune produit plus ou moins de lumière.'],answer:1,explain:'Le Soleil éclaire toujours environ une moitié de la Lune. Sa position change la portion éclairée visible depuis la Terre.'},
-  {q:'Quelle phase suit le premier quartier ?',options:['La Lune gibbeuse croissante.','Le dernier croissant.','La nouvelle Lune.'],answer:0,explain:'Après le premier quartier, la partie éclairée continue de grandir : c’est la Lune gibbeuse croissante, puis vient la pleine Lune.'},
-  {q:'Combien de temps dure une lunaison en moyenne ?',options:['24 heures.','27,32 jours.','29,53 jours.'],answer:2,explain:'Deux nouvelles Lunes sont séparées de 29,53 jours en moyenne. Les 27,32 jours correspondent à la révolution sidérale, par rapport aux étoiles.'},
-  {q:'Pourquoi n’y a-t-il pas d’éclipse à chaque pleine Lune ?',options:['Le Soleil s’éteint pendant la nuit.','L’orbite de la Lune est inclinée d’environ 5,1°.','La Terre n’a pas d’ombre à la pleine Lune.'],answer:1,explain:'L’inclinaison de l’orbite lunaire fait que la Lune passe généralement au-dessus ou au-dessous de l’ombre terrestre.'},
-  {q:'Au premier quartier, quelle fraction du disque visible est éclairée ?',options:['Environ 25 %.','Environ 50 %.','Environ 100 %.'],answer:1,explain:'« Quartier » désigne ici un quart du cycle. À cette phase, environ la moitié du disque visible est éclairée, à droite dans notre convention nord en haut.'},
-  {q:'Pourquoi la Lune nous présente-t-elle approximativement la même face ?',options:['Elle ne tourne pas sur elle-même.','Elle tourne sur elle-même en un an.','Sa rotation et sa révolution sidérale ont la même durée.'],answer:2,explain:'La Lune tourne bien sur elle-même. Sa rotation synchrone prend environ 27,32 jours, comme son tour autour de la Terre par rapport aux étoiles.'}
+  {topic:'phases',q:'Au premier quartier, quelle partie du disque voit-on éclairée, avec le nord en haut ?',options:['La moitié gauche.','La moitié droite.','Un quart seulement du disque.'],answer:1,explain:'Dans la convention de l’hémisphère Nord utilisée ici, la moitié droite est éclairée au premier quartier. « Quartier » désigne un quart du cycle, pas un quart du disque.'},
+  {topic:'phases',q:'Deux nouvelles Lunes successives sont séparées en moyenne de…',options:['27,32 jours : la révolution sidérale.','30 ou 31 jours exactement, selon le mois.','29,53 jours : la lunaison.'],answer:2,explain:'La lunaison est le cycle des phases : 29,53 jours en moyenne. La période sidérale de 27,32 jours mesure le tour de la Lune par rapport aux étoiles. La Terre avance aussi autour du Soleil, d’où la différence.'},
+  {topic:'eclipses',q:'Pendant une éclipse de Soleil, un anneau lumineux entoure la Lune. Quel type d’éclipse observes-tu ?',options:['Une éclipse annulaire.','Une éclipse totale de Lune.','Une éclipse solaire totale.'],answer:0,explain:'Lors d’une éclipse annulaire, la Lune paraît trop petite pour cacher tout le disque solaire. Un anneau de Soleil reste visible. Il faut un filtre solaire adapté pour l’observer.'},
+  {topic:'eclipses',q:'Pourquoi une pleine Lune ne provoque-t-elle pas une éclipse de Lune chaque mois ?',options:['La Terre ne projette une ombre qu’en hiver.','L’orbite lunaire est inclinée : l’alignement exact est rare.','La Lune est alors trop lumineuse pour être assombrie.'],answer:1,explain:'L’orbite lunaire est inclinée d’environ 5,1° par rapport au plan de l’orbite terrestre. La Lune passe généralement au-dessus ou au-dessous de l’ombre terrestre. Une pleine Lune doit avoir lieu près d’un nœud orbital pour qu’une éclipse soit possible.'},
+  {topic:'horaires',q:'Vers quelle heure la pleine Lune se lève-t-elle généralement ?',options:['Vers midi.','Vers le lever du Soleil.','Vers le coucher du Soleil.'],answer:2,explain:'La pleine Lune est à l’opposé du Soleil dans le ciel : elle se lève approximativement quand le Soleil se couche, culmine vers minuit solaire et se couche vers le lever du Soleil. Le lieu et la saison modifient ces repères.'},
+  {topic:'horaires',q:'Que signifie le décalage d’environ 50 minutes par jour ?',options:['Le retour au méridien est retardé en moyenne ; les levers et couchers ont un décalage variable.','La Lune se lève exactement 50 minutes plus tard partout et chaque jour.','La Lune reste visible seulement 50 minutes chaque nuit.'],answer:0,explain:'Pendant que la Terre tourne, la Lune avance vers l’est. Son retour au méridien prend environ 24 h 50 min en moyenne. Les heures de lever et de coucher dépendent aussi de la latitude et de sa trajectoire dans le ciel : leur retard quotidien n’est pas constant.'},
+  {topic:'marees',q:'Près des nouvelles et pleines Lunes, pourquoi observe-t-on généralement des vives-eaux ?',options:['Les phases rendent l’eau plus lourde.','Les effets de marée de la Lune et du Soleil se renforcent.','Une éclipse aspire les océans vers le haut.'],answer:1,explain:'Les directions du Soleil et de la Lune sont approximativement alignées depuis la Terre : leurs effets de marée se renforcent. Le marnage, différence entre pleine mer et basse mer successives, est généralement plus grand. Aucune éclipse n’est nécessaire et un retard local est possible.'},
+  {topic:'marees',q:'Tu veux explorer une plage à marée basse. Quelle information faut-il consulter ?',options:['Seulement la phase de la Lune.','L’heure du lever de la Lune, identique à celle de la basse mer.','Les prévisions de marée locales et la météo.'],answer:2,explain:'La phase seule ne donne ni l’heure ni la hauteur de la marée sur une plage. Les fonds, les côtes et les rythmes locaux modifient la réponse de l’océan ; le vent et la pression changent aussi le niveau réel de la mer.'}
 ];
-const quiz={index:0,score:0,answered:false,finished:false};
+const quiz={index:0,score:0,answered:false,finished:false,started:false,answers:[]};
+function quizProgress(count){
+  $('quiz-bar').style.width=`${count/QUESTIONS.length*100}%`;
+  $('quiz-progress-track').setAttribute('aria-valuenow',String(count));
+  $('quiz-progress-track').setAttribute('aria-valuetext',`${count} réponse${count>1?'s':''} sur ${QUESTIONS.length}`);
+}
+function focusQuizQuestion(){ $('quiz-question').focus({preventScroll:true}); }
+function startQuiz(){
+  Object.assign(quiz,{index:0,score:0,answered:false,finished:false,started:true,answers:[]});
+  $('quiz-welcome').hidden=true;$('quiz-results').hidden=true;$('quiz-stage').hidden=false;
+  $('quiz-restart').hidden=false;renderQuestion();focusQuizQuestion();
+}
 function renderQuestion(){
   const question=QUESTIONS[quiz.index];quiz.answered=false;
-  $('quiz-progress').textContent=`QUESTION ${String(quiz.index+1).padStart(2,'0')} / 06`;
-  $('quiz-score').textContent=`${quiz.score} bonne${quiz.score>1?'s':''} réponse${quiz.score>1?'s':''}`;
-  $('quiz-bar').style.width=`${(quiz.index+1)/QUESTIONS.length*100}%`;
+  $('quiz-progress').textContent=`QUESTION ${String(quiz.index+1).padStart(2,'0')} / ${String(QUESTIONS.length).padStart(2,'0')}`;
+  $('quiz-topic').textContent=QUIZ_TOPICS[question.topic].label;
+  $('quiz-score').textContent=`${quiz.score} / ${QUESTIONS.length} point${quiz.score>1?'s':''}`;
+  quizProgress(quiz.index);
   $('quiz-question').textContent=question.q;
   $('quiz-options').replaceChildren();$('quiz-feedback').textContent='';$('quiz-next').hidden=true;
   question.options.forEach((option,index)=>{
-    const button=document.createElement('button');button.className='quiz-option';
-    const letter=document.createElement('span');letter.textContent=String.fromCharCode(65+index);
-    const text=document.createElement('span');text.textContent=option;text.style.color='inherit';
+    const button=document.createElement('button');button.type='button';button.className='quiz-option';
+    const letter=document.createElement('span');letter.textContent=String.fromCharCode(65+index);letter.setAttribute('aria-hidden','true');
+    const text=document.createElement('span');text.textContent=option;text.className='quiz-option-text';
     button.append(letter,text);button.addEventListener('click',()=>answerQuestion(index));$('quiz-options').append(button);
   });
 }
 function answerQuestion(index){
-  if(quiz.answered)return;quiz.answered=true;
+  if(!quiz.started||quiz.answered||quiz.finished||!Number.isInteger(index)||index<0||index>=QUESTIONS[quiz.index].options.length)return;
+  quiz.answered=true;
   const question=QUESTIONS[quiz.index],correct=index===question.answer;
-  if(correct)quiz.score++;
-  [...$('quiz-options').children].forEach((button,i)=>{button.disabled=true;if(i===question.answer)button.classList.add('correct');else if(i===index)button.classList.add('incorrect');});
-  $('quiz-feedback').textContent=`${correct?'Bonne réponse !':'Pas tout à fait.'} ${question.explain}`;
-  $('quiz-score').textContent=`${quiz.score} bonne${quiz.score>1?'s':''} réponse${quiz.score>1?'s':''}`;
-  $('quiz-next').textContent=quiz.index===QUESTIONS.length-1?'Voir mon résultat →':'Question suivante →';$('quiz-next').hidden=false;
+  quiz.answers.push({chosen:index,correct});if(correct)quiz.score++;
+  [...$('quiz-options').children].forEach((button,i)=>{
+    button.disabled=true;
+    if(i===question.answer){button.classList.add('correct');const badge=document.createElement('span');badge.className='answer-badge';badge.textContent='✓ Bonne réponse';button.append(badge);}
+    else if(i===index){button.classList.add('incorrect');const badge=document.createElement('span');badge.className='answer-badge';badge.textContent='✕ Votre réponse';button.append(badge);}
+  });
+  $('quiz-feedback').textContent=`${correct?'Bien vu !':'À retenir :'} ${question.explain}`;
+  $('quiz-score').textContent=`${quiz.score} / ${QUESTIONS.length} point${quiz.score>1?'s':''}`;
+  quizProgress(quiz.index+1);
+  $('quiz-next').textContent=quiz.index===QUESTIONS.length-1?'Découvrir mon bilan →':'Question suivante →';
+  $('quiz-next').hidden=false;$('quiz-next').focus({preventScroll:true});
 }
+function showQuizResults(){
+  quiz.finished=true;$('quiz-stage').hidden=true;$('quiz-results').hidden=false;
+  $('quiz-result-score').textContent=`${quiz.score} / ${QUESTIONS.length}`;
+  $('quiz-result-message').textContent=quiz.score===QUESTIONS.length?'Tout juste ! Tu relies maintenant les phases, les éclipses, les horaires et les marées.':quiz.score>=QUESTIONS.length/2?'De bons repères ! Consulte tes corrections pour éclaircir les points qui restent.':'Chaque réponse est une occasion d’apprendre. Reprends les thèmes ci-dessous, puis réessaie à ton rythme.';
+  $('quiz-theme-results').replaceChildren();
+  Object.entries(QUIZ_TOPICS).forEach(([key,topic])=>{
+    const indices=QUESTIONS.map((q,i)=>q.topic===key?i:-1).filter(i=>i>=0);
+    const points=indices.filter(i=>quiz.answers[i].correct).length;
+    const button=document.createElement('button');button.type='button';button.className='quiz-theme-result';
+    const label=document.createElement('strong');label.textContent=topic.label;
+    const score=document.createElement('span');score.textContent=`${points} / ${indices.length} · Revoir le cours ↗`;
+    button.append(label,score);button.addEventListener('click',()=>selectTab(topic.panel,{updateHash:true,focusPanel:true}));
+    $('quiz-theme-results').append(button);
+  });
+  $('quiz-review').replaceChildren();
+  QUESTIONS.forEach((question,i)=>{
+    const result=quiz.answers[i],details=document.createElement('details');
+    const summary=document.createElement('summary');summary.textContent=`${result.correct?'✓':'✕'} ${i+1}. ${question.q}`;
+    const chosen=document.createElement('p');chosen.textContent=`Ta réponse : ${question.options[result.chosen]}`;
+    const answer=document.createElement('p');answer.textContent=`Bonne réponse : ${question.options[question.answer]}`;
+    const explanation=document.createElement('p');explanation.textContent=question.explain;
+    details.append(summary,chosen,answer,explanation);$('quiz-review').append(details);
+  });
+  $('quiz-result-title').focus({preventScroll:true});
+}
+$('quiz-start').addEventListener('click',startQuiz);
+$('quiz-restart').addEventListener('click',startQuiz);
+$('quiz-retry').addEventListener('click',startQuiz);
 $('quiz-next').addEventListener('click',()=>{
-  if(quiz.finished){quiz.index=0;quiz.score=0;quiz.finished=false;renderQuestion();}
-  else if(quiz.index<QUESTIONS.length-1){quiz.index++;renderQuestion();}
-  else{
-    quiz.finished=true;$('quiz-progress').textContent='EXPLORATION TERMINÉE';
-    $('quiz-question').textContent=`Votre score : ${quiz.score} / ${QUESTIONS.length}`;
-    $('quiz-options').replaceChildren();
-    $('quiz-feedback').textContent=quiz.score===6?'Vous avez percé le secret des phases ! Continuez à explorer le ciel.':'Chaque observation aide à comprendre. Explorez à nouveau l’orbite, puis retentez votre chance !';
-    $('quiz-next').textContent='↺ Recommencer le quiz';
-  }
-  $('quiz-question').setAttribute('tabindex','-1');$('quiz-question').focus({preventScroll:true});
+  if(!quiz.answered||quiz.finished)return;
+  if(quiz.index===QUESTIONS.length-1){showQuizResults();return;}
+  quiz.index++;renderQuestion();focusQuizQuestion();
 });
-createPhaseCards();setDay(state.day,false);renderQuestion();
+createPhaseCards();setDay(state.day,false);
 
 // Onglets accessibles : état conservé, liens directs et historique navigateur.
 const TOPICS = ['simulateur','phases','comprendre','eclipses','horaires-lune','marees','quiz'];
